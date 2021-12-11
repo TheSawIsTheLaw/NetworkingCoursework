@@ -1,13 +1,16 @@
 package protocol
 
-class YdvpStartingLineQuery(val method: String, val uri: String, val version: String) {
+abstract class YdvpStartingLine
+
+class YdvpStartingLineQuery(val method: String, val uri: String, val version: String) : YdvpStartingLine() {
     override fun toString(): String {
         return "$method $uri YDVP/$version\n"
     }
 }
 
-class YdvpStartingLineResponse(val version: String, val responseCode: String, val explanation: String) {
+class YdvpStartingLineResponse(val version: String, val responseCode: String, val explanation: String) :
+    YdvpStartingLine() {
     override fun toString(): String {
-        return "YDVP/$version $responseCode $explanation"
+        return "YDVP/$version $responseCode $explanation\n"
     }
 }
