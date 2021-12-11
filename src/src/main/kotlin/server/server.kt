@@ -6,10 +6,12 @@ import java.io.PrintWriter
 import java.lang.Runtime.getRuntime
 import java.net.ServerSocket
 import java.net.Socket
-import kotlin.concurrent.thread
+import java.net.SocketException
 
-class InfluxServiceClientHandler(val clientSocket: Socket) {
+class InfluxServiceClientHandler(private val clientSocket: Socket) {
     fun run() {
+        println("Accepted client on ${clientSocket.localSocketAddress} from ${clientSocket.remoteSocketAddress}")
+
         val bufferedReader = BufferedReader(InputStreamReader(clientSocket.getInputStream()))
 
         val gotMessage = bufferedReader.readLine()
@@ -25,22 +27,23 @@ class InfluxServiceClientHandler(val clientSocket: Socket) {
 class InfluxServiceServer(socketPort: Int) {
     private val serverSocket = ServerSocket(socketPort)
 
-    init {
-        getRuntime().addShutdownHook(Thread { serverSocket.close() })
-    }
-
     fun run() {
+        getRuntime().addShutdownHook(Thread {
+//            Ok, so... JVM just closes it all for me. And I cannot even reach it. Nice.
+//            if (serverSocket.isClosed)
+//                serverSocket.close()
+
+            println("Server on port ${serverSocket.localPort} stopped")
+        })
+
         if (!serverSocket.isBound || serverSocket.isClosed) {
-            throw Exception("Server socket fatal error")
+            throw SocketException("Server socket is already in use")
         }
+
+        println("Server started on port ${serverSocket.localPort}")
 
         while (true) {
             InfluxServiceClientHandler(serverSocket.accept()).run()
         }
-    }
-
-    fun stop() {
-        if (!serverSocket.isClosed)
-            serverSocket.close()
     }
 }

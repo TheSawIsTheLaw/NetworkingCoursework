@@ -14,6 +14,8 @@ class InfluxServiceClient(private val ip: String, private val port: Int) {
         clientSocket = Socket(ip, port)
         output = PrintWriter(clientSocket!!.getOutputStream(), true)
         input = BufferedReader(InputStreamReader(clientSocket!!.getInputStream()))
+
+        println("Client connected from ${clientSocket!!.localSocketAddress} to ${clientSocket!!.remoteSocketAddress}")
     }
 
     fun sendGreetingMessageAndGetResponse(): String? {
