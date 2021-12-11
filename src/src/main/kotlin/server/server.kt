@@ -38,8 +38,3 @@ class InfluxServiceServer(socketPort: Int) {
             serverSocket.close()
     }
 }
-
-
-fun main() {
-
-}
