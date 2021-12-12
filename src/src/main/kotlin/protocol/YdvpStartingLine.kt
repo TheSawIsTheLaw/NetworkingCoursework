@@ -2,7 +2,7 @@ package protocol
 
 abstract class YdvpStartingLine
 
-class YdvpStartingLineQuery(val method: String, val uri: String, val version: String) : YdvpStartingLine() {
+class YdvpStartingLineRequest(val method: String, val uri: String, val version: String) : YdvpStartingLine() {
     override fun toString(): String {
         return "$method $uri YDVP/$version\n"
     }

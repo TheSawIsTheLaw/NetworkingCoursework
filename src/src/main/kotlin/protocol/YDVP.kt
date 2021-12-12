@@ -1,9 +1,9 @@
 package protocol
 
 class YDVP(
-    private val startingLine: YdvpStartingLine,
-    private val headers: List<YdvpHeader>,
-    private val body: String = ""
+    val startingLine: YdvpStartingLine,
+    val headers: List<YdvpHeader>,
+    val body: String = ""
 ) {
 //    private val name = "YDVP"
 //    private val version = "1.1"
@@ -13,8 +13,8 @@ class YDVP(
             throw Exception("Headers cannot be empty")
     }
 
-    fun createRequest(): String {
-        var requestString = "${startingLine as YdvpStartingLineQuery}\n"
+    fun createStringRequest(): String {
+        var requestString = "${startingLine as YdvpStartingLineRequest}\n"
         headers.forEach { requestString += it }
 
         requestString += "\n$body"
@@ -22,7 +22,7 @@ class YDVP(
         return requestString
     }
 
-    fun createResponse(): String {
+    fun createStringResponse(): String {
         var requestString = "${startingLine as YdvpStartingLineResponse}\n"
         headers.forEach { requestString += it }
         requestString += "\n$body"
