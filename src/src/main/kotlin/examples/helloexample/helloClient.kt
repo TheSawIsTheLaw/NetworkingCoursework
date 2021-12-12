@@ -1,6 +1,10 @@
 package examples.helloexample
 
 import client.InfluxServiceClient
+import protocol.YDVP
+import protocol.YdvpHeader
+import protocol.YdvpStartingLineRequest
+import protocol.YdvpStartingLineResponse
 import java.net.ConnectException
 
 fun main() {
@@ -13,6 +17,13 @@ fun main() {
         return
     }
 
-    client.sendGreetingMessageAndGetResponse()
+    client.sendRequestAndGetResponse(
+        YDVP(
+            YdvpStartingLineRequest("GET", "/lll/lll", "0.1"),
+            listOf(YdvpHeader("Host", "127.0.0.1")),
+            "{\n    \"smth\": \"lol\"\n}\n"
+        )
+    )
+
     client.close()
 }

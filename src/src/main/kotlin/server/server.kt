@@ -1,5 +1,10 @@
 package server
 
+import protocol.YDVP
+import protocol.YdvpHeader
+import protocol.YdvpStartingLineRequest
+import protocol.YdvpStartingLineResponse
+import protocol.parser.YdvpParser
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.io.PrintWriter
@@ -14,12 +19,24 @@ class InfluxServiceClientHandler(private val clientSocket: Socket) {
 
         val bufferedReader = BufferedReader(InputStreamReader(clientSocket.getInputStream()))
 
-        val gotMessage = bufferedReader.readLine()
-        /* And here comes protocol */
+        var gotRequest = bufferedReader.readLine() + "\n"
+        while (bufferedReader.ready())
+            gotRequest += bufferedReader.readLine() + "\n"
 
-        if (gotMessage == "Hello message from socket") {
+        println("Got lines are: \n$gotRequest")
+        val ydvpRequest = YdvpParser().parseRequest(gotRequest)
+
+        /* And here comes protocol */
+        /* FUS ROH DAH */
+        val startingLine = ydvpRequest.startingLine as YdvpStartingLineRequest
+        if (startingLine.method == "GET") {
             val output = PrintWriter(clientSocket.getOutputStream(), true)
-            output.println("Henlo")
+            output.println(
+                YDVP(
+                    YdvpStartingLineResponse("0.1", "200", "OK"),
+                    listOf(YdvpHeader("Server", "127.0.0.1"))
+                ).createStringResponse()
+            )
         }
     }
 }

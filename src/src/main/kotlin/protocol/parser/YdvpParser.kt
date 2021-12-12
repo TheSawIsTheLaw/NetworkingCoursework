@@ -59,9 +59,24 @@ class YdvpParser {
         val workLines = lines.toMutableList()
         workLines.removeAt(0)
 
-        val headers = parseHeaders(workLines.takeWhile { it.isNotEmpty() })
+        while (workLines.last().isEmpty())
+            workLines.removeAt(workLines.size - 1)
 
-        val body = workLines.takeLastWhile { it.isNotEmpty() }.reduce { acc, it -> acc + "\n" + it }
+        println("Worklines = \n$workLines")
+
+        val partWithHeaders = workLines.takeWhile { it.isNotEmpty() }
+        val headers = parseHeaders(partWithHeaders)
+
+        var body = ""
+        if (partWithHeaders.size != workLines.size) {
+            val bodyWorkLines = workLines.takeLastWhile { it.isNotEmpty() }
+            if (bodyWorkLines.isNotEmpty())
+            {
+                body = bodyWorkLines.reduce { acc, s -> acc + "\n" + s }
+            }
+
+            println("outBody = \n$body")
+        }
 
         return Pair(headers, body)
     }
