@@ -18,6 +18,7 @@ import protocol.parser.YdvpParser
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.io.PrintWriter
+import java.lang.NullPointerException
 import java.lang.Runtime.getRuntime
 import java.net.ServerSocket
 import java.net.Socket
@@ -29,11 +30,31 @@ class InfluxServiceClientHandler(private val clientSocket: Socket) {
 
     private val controller by inject<DataController>(DataController::class.java)
 
+    private val badRequestResponse by lazy {
+        YDVP(
+            YdvpStartingLineResponse(ydvpVersion, "400", "BAD REQUEST"),
+            listOf(defaultHeader)
+        )
+    }
+    private val internalServerErrorResponse by lazy {
+        YDVP(
+            YdvpStartingLineResponse(ydvpVersion, "500", "INTERNAL SERVER ERROR"),
+            listOf(defaultHeader)
+        )
+    }
+
+    private val notFoundResponse by lazy {
+        YDVP(
+            YdvpStartingLineResponse(ydvpVersion, "404", "NOT FOUND"),
+            listOf(defaultHeader)
+        )
+    }
+
     private fun prepareUri(uri: String): List<String> {
         val parsedUri = uri.split("/").toMutableList()
 
         if (parsedUri[0] != "")
-            throw Exception("URI format error")
+            throw UnsupportedUriException("URI format error")
 
         parsedUri.removeAt(0)
         return parsedUri
@@ -48,7 +69,7 @@ class InfluxServiceClientHandler(private val clientSocket: Socket) {
         return when (parsedUri.first()) {
             "data" -> {
                 if (parsedUri.size < 2)
-                    throw Exception("Not enough inline arguments")
+                    throw UnsupportedUriException("Not enough inline arguments")
                 val response = controller.addData(
                     parsedUri[1],
                     GsonObject.gson.fromJson(body, AcceptMeasurementsListDTO::class.java)
@@ -64,7 +85,7 @@ class InfluxServiceClientHandler(private val clientSocket: Socket) {
                     GsonObject.gson.toJson(response.body)
                 )
             }
-            else -> throw Exception("Unsupported URI")
+            else -> throw UnsupportedUriException("Unsupported URI")
         }
     }
 
@@ -74,7 +95,7 @@ class InfluxServiceClientHandler(private val clientSocket: Socket) {
         return when (parsedUri.first()) {
             "data" -> {
                 if (parsedUri.size < 2)
-                    throw Exception("Not enough inline arguments")
+                    throw UnsupportedUriException("Not enough inline arguments")
                 val response =
                     controller.getData(parsedUri[1], GsonObject.gson.fromJson(body, Array<String>::class.java).toList())
 
@@ -88,7 +109,7 @@ class InfluxServiceClientHandler(private val clientSocket: Socket) {
                     GsonObject.gson.toJson(response.body)
                 )
             }
-            else -> throw Exception("Unsupported URI")
+            else -> throw UnsupportedUriException("Way not found")
         }
     }
 
@@ -99,10 +120,21 @@ class InfluxServiceClientHandler(private val clientSocket: Socket) {
 
         val body = ydvpRequest.body
 
-        return when (method) {
-            "GET" -> controllerGetMethod(uri, body)
-            "POST" -> controllerPostMethod(uri, body)
-            else -> throw Exception("Unsupported method")
+        return try {
+            when (method) {
+                "GET" -> controllerGetMethod(uri, body)
+                "POST" -> controllerPostMethod(uri, body)
+                else -> badRequestResponse
+            }
+        } catch (exc: NullPointerException) {
+            badRequestResponse
+        } catch (exc: UnsupportedUriException) {
+            notFoundResponse
+        } catch (exc: Exception) {
+            println("EXCEPTION")
+            println(exc.javaClass)
+            println(exc.localizedMessage)
+            internalServerErrorResponse
         }
     }
 
@@ -116,11 +148,18 @@ class InfluxServiceClientHandler(private val clientSocket: Socket) {
             gotRequest += bufferedReader.readLine() + "\n"
 
         println("Got lines are: \n$gotRequest")
-        val ydvpRequest = YdvpParser().parseRequest(gotRequest)
+        val clientOut = PrintWriter(clientSocket.getOutputStream(), true)
+
+        val ydvpRequest = try {
+            YdvpParser().parseRequest(gotRequest)
+        } catch (exc: Exception) {
+            clientOut.println(badRequestResponse)
+
+            return
+        }
 
         /* And here comes protocol */
         /* FUS ROH DAH */
-        val clientOut = PrintWriter(clientSocket.getOutputStream(), true)
         val response = controllerWayByMethod(ydvpRequest).createStringResponse()
         println("Returned to client:\n$response")
         clientOut.println(response)

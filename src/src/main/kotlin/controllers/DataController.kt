@@ -1,5 +1,6 @@
 package controllers
 
+import com.influxdb.exceptions.NotFoundException
 import controllers.services.DataService
 import domain.dtos.*
 import domain.response.ResponseCreator
@@ -20,7 +21,11 @@ class DataController {
                     username,
                     measurementsNames
                 )
-        } catch (exc: Exception) {
+        }
+        catch (exc: NotFoundException) {
+            return ResponseCreator.userNotFoundResponse("USER NOT FOUND", "Add some data for user at first")
+        }
+        catch (exc: Exception) {
             return ResponseCreator.internalServerErrorResponse(
                 "Data server is dead :(",
                 "Let's dance on its grave!"
