@@ -1,5 +1,6 @@
 package server
 
+import com.google.gson.reflect.TypeToken
 import config.InfluxdbConfiguration
 import controllers.DataController
 import controllers.services.DataService
@@ -75,7 +76,7 @@ class InfluxServiceClientHandler(private val clientSocket: Socket) {
                 if (parsedUri.size < 2)
                     throw Exception("Not enough inline arguments")
                 val response =
-                    controller.getData(parsedUri[1], GsonObject.gson.fromJson(body, listOf<String>().javaClass))
+                    controller.getData(parsedUri[1], GsonObject.gson.fromJson(body, Array<String>::class.java).toList())
 
                 YDVP(
                     YdvpStartingLineResponse(
@@ -120,7 +121,9 @@ class InfluxServiceClientHandler(private val clientSocket: Socket) {
         /* And here comes protocol */
         /* FUS ROH DAH */
         val clientOut = PrintWriter(clientSocket.getOutputStream(), true)
-        clientOut.println(controllerWayByMethod(ydvpRequest).createStringResponse())
+        val response = controllerWayByMethod(ydvpRequest).createStringResponse()
+        println("Returned to client:\n$response")
+        clientOut.println(response)
     }
 }
 

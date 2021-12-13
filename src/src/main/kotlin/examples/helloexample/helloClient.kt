@@ -4,6 +4,7 @@ import client.InfluxServiceClient
 import domain.dtos.AcceptMeasurementsDTO
 import domain.dtos.AcceptMeasurementsListDTO
 import domain.dtos.MeasurementDataWithoutTime
+import domain.dtos.ResponseMeasurementsDTO
 import gson.GsonObject
 import protocol.YDVP
 import protocol.YdvpHeader
@@ -34,7 +35,7 @@ val measurementsToSend = AcceptMeasurementsListDTO(
     )
 )
 
-fun main() {
+fun sendTest() {
     val client = InfluxServiceClient("localhost", 6666)
 
     try {
@@ -53,4 +54,31 @@ fun main() {
     )
 
     client.close()
+}
+
+fun getTest() {
+    val client = InfluxServiceClient("localhost", 6666)
+
+    try {
+        client.connect()
+    } catch (exc: ConnectException) {
+        println("Server is dead")
+        return
+    }
+
+    client.sendRequestAndGetResponse(
+        YDVP(
+            YdvpStartingLineRequest("GET", "/data/TestUser", "0.1"),
+            listOf(YdvpHeader("Host", "127.0.0.1")),
+            GsonObject.gson.toJson(listOf("pulse", "botArterialPressure"))
+        )
+    )
+
+    client.close()
+
+}
+
+fun main() {
+//    sendTest()
+    getTest()
 }
