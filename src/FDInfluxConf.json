@@ -1,5 +1,5 @@
 {
   "influxdbURL": "http://influxdb:8086",
-  "influxdbAdminToken": "HsJBf0sINtvxedXJio2Lg7iskJgLcR5q8a0MZtqoiWZt66pBEQ0LUz0IPEe5ooD2GqaxQoGxzqoIi-U1CLINow==",
+  "influxdbAdminToken": "qWxhYMJ8CpYyhi8Q9ArYyRK3L6Tyk0lZG8BhXr5Ok-HONjUv8T1_yWhHHB5bQVKHebjcD9pcsTvW3KuA_eoBCQ==",
   "influxdbOrganization": "subjects"
 }
