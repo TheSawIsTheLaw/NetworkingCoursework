@@ -1,11 +1,38 @@
 package examples.helloexample
 
 import client.InfluxServiceClient
+import domain.dtos.AcceptMeasurementsDTO
+import domain.dtos.AcceptMeasurementsListDTO
+import domain.dtos.MeasurementDataWithoutTime
+import gson.GsonObject
 import protocol.YDVP
 import protocol.YdvpHeader
 import protocol.YdvpStartingLineRequest
 import protocol.YdvpStartingLineResponse
 import java.net.ConnectException
+
+val measurementsToSend = AcceptMeasurementsListDTO(
+    listOf(
+        AcceptMeasurementsDTO(
+            "pulse", listOf(
+                MeasurementDataWithoutTime("30"),
+                MeasurementDataWithoutTime("40")
+            )
+        ),
+        AcceptMeasurementsDTO(
+            "botArterialPressure", listOf(
+                MeasurementDataWithoutTime("40"),
+                MeasurementDataWithoutTime("50")
+            )
+        ),
+        AcceptMeasurementsDTO(
+            "topArterialPressure", listOf(
+                MeasurementDataWithoutTime("80"),
+                MeasurementDataWithoutTime("90")
+            )
+        )
+    )
+)
 
 fun main() {
     val client = InfluxServiceClient("localhost", 6666)
@@ -19,9 +46,9 @@ fun main() {
 
     client.sendRequestAndGetResponse(
         YDVP(
-            YdvpStartingLineRequest("GET", "/lll/lll", "0.1"),
+            YdvpStartingLineRequest("POST", "/data/TestUser", "0.1"),
             listOf(YdvpHeader("Host", "127.0.0.1")),
-            "{\n    \"smth\": \"lol\"\n}\n"
+            GsonObject.gson.toJson(measurementsToSend)
         )
     )
 

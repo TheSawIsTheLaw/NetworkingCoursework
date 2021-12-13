@@ -118,6 +118,7 @@ class InfluxDAO(private val config: InfluxdbConfiguration) : CharDAOInterface {
     private fun bucketNotExists(bucketName: String): Boolean {
         val httpClient = OkHttpClient()
 
+        println(config.configData.influxdbURL)
         var apiString = config.configData.influxdbURL
         if (apiString.last() != '/') {
             apiString += '/'
@@ -138,6 +139,7 @@ class InfluxDAO(private val config: InfluxdbConfiguration) : CharDAOInterface {
             .build()
 
         val retVal: Boolean
+        println(request)
         val response = httpClient.newCall(request).execute()
         response.use {
             if (response.code != 200) {

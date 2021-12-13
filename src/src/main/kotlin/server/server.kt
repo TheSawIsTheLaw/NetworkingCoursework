@@ -41,6 +41,9 @@ class InfluxServiceClientHandler(private val clientSocket: Socket) {
     private fun controllerPostMethod(uri: String, body: String): YDVP {
         val parsedUri = prepareUri(uri)
 
+        println("Body in controller:")
+        println(body)
+
         return when (parsedUri.first()) {
             "data" -> {
                 if (parsedUri.size < 2)
