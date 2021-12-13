@@ -75,10 +75,9 @@ fun getTest() {
             )
         )
     }
-
 }
 
 fun main() {
-//    sendTest()
-    getTest()
+    sendTest()
+//    getTest()
 }

@@ -30,6 +30,18 @@ class InfluxServiceClientHandler(private val clientSocket: Socket) {
 
     private val controller by inject<DataController>(DataController::class.java)
 
+    private fun anyResponse(code: String, explanation: String, body: Any): YDVP {
+        return YDVP(
+            YdvpStartingLineResponse(
+                ydvpVersion,
+                code,
+                explanation
+            ),
+            listOf(defaultHeader),
+            GsonObject.gson.toJson(body)
+        )
+    }
+
     private val badRequestResponse by lazy {
         YDVP(
             YdvpStartingLineResponse(ydvpVersion, "400", "BAD REQUEST"),
@@ -75,15 +87,7 @@ class InfluxServiceClientHandler(private val clientSocket: Socket) {
                     GsonObject.gson.fromJson(body, AcceptMeasurementsListDTO::class.java)
                 )
 
-                YDVP(
-                    YdvpStartingLineResponse(
-                        ydvpVersion,
-                        response.statusCodeValue.toString(),
-                        response.statusCode.name
-                    ),
-                    listOf(defaultHeader),
-                    GsonObject.gson.toJson(response.body)
-                )
+                anyResponse(response.statusCodeValue.toString(), response.statusCode.name, response.body)
             }
             else -> throw UnsupportedUriException("Unsupported URI")
         }
@@ -99,15 +103,7 @@ class InfluxServiceClientHandler(private val clientSocket: Socket) {
                 val response =
                     controller.getData(parsedUri[1], GsonObject.gson.fromJson(body, Array<String>::class.java).toList())
 
-                YDVP(
-                    YdvpStartingLineResponse(
-                        ydvpVersion,
-                        response.statusCodeValue.toString(),
-                        response.statusCode.name
-                    ),
-                    listOf(defaultHeader),
-                    GsonObject.gson.toJson(response.body)
-                )
+                anyResponse(response.statusCodeValue.toString(), response.statusCode.name, response.body)
             }
             else -> throw UnsupportedUriException("Way not found")
         }
