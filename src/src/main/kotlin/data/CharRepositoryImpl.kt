@@ -5,7 +5,8 @@ import domain.charrepository.CharRepositoryInterface
 import domain.logicentities.*
 import com.influxdb.client.kotlin.InfluxDBClientKotlin
 import com.influxdb.client.kotlin.InfluxDBClientKotlinFactory
-import org.springframework.stereotype.Repository
+import org.koin.java.KoinJavaComponent.inject
+import org.springframework.stereotype.Component
 
 class InfluxConnection(
     private val connectionString: String,
@@ -31,10 +32,10 @@ class InfluxConnection(
     }
 }
 
-@Repository
-class CharRepositoryImpl(private val config: InfluxdbConfiguration) :
-    CharRepositoryInterface {
-    val influxDAO = InfluxDAO(config)
+class CharRepositoryImpl : CharRepositoryInterface {
+    private val config by inject<InfluxdbConfiguration>(InfluxdbConfiguration::class.java)
+
+    private val influxDAO = InfluxDAO(config)
 
     private fun get(
         dataAccessInfo: DSDataAccessInfo,

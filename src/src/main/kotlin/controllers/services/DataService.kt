@@ -9,21 +9,18 @@ import domain.logicentities.DSDataAccessInfo
 import domain.logicentities.DSDataAddInfo
 import domain.logicentities.DSMeasurement
 import domain.logicentities.DSMeasurementList
-import org.springframework.stereotype.Service
+import org.koin.java.KoinJavaComponent.inject
 import java.time.Instant
 
-@Service
-class DataService(private val charRepository: CharRepositoryImpl)
-{
+class DataService {
+    private val charRepository by inject<CharRepositoryImpl>(CharRepositoryImpl::class.java)
+
     private fun getMeasurement(
-        token: String,
         bucketName: String,
         charName: String
-    ): List<DSMeasurement>
-    {
+    ): List<DSMeasurement> {
         val gotInformation = charRepository.get(
             DSDataAccessInfo(
-                token,
                 bucketName,
                 Pair(0, 0),
                 charName
@@ -34,19 +31,16 @@ class DataService(private val charRepository: CharRepositoryImpl)
     }
 
     fun getMeasurements(
-        token: String,
         bucketName: String,
         requiredNames: List<String>
-    ): List<MeasurementDTO>
-    {
+    ): List<MeasurementDTO> {
         val outMeasurements: MutableList<MeasurementDTO> =
             mutableListOf()
 
-        for (charName in requiredNames)
-        {
+        for (charName in requiredNames) {
             outMeasurements.add(
                 MeasurementDTO(
-                    charName, getMeasurement(token, bucketName, charName).map {
+                    charName, getMeasurement(bucketName, charName).map {
                         MeasurementData(
                             it.value, it.time
                         )
@@ -59,15 +53,12 @@ class DataService(private val charRepository: CharRepositoryImpl)
     }
 
     private fun sendMeasurement(
-        token: String,
         bucketName: String,
         charName: String,
         chars: List<MeasurementDataWithoutTime>
-    )
-    {
+    ) {
         charRepository.add(
             DSDataAddInfo(
-                token,
                 bucketName, DSMeasurementList
                     (
                     charName,
@@ -83,15 +74,12 @@ class DataService(private val charRepository: CharRepositoryImpl)
     }
 
     fun sendMeasurements(
-        token: String,
         bucketName: String,
         chars: AcceptMeasurementsListDTO
-    )
-    {
-        for (measurement in chars.measurements)
-        {
+    ) {
+        for (measurement in chars.measurements) {
             sendMeasurement(
-                token, bucketName,
+                bucketName,
                 measurement.measurement, measurement.values
             )
         }

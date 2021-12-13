@@ -1,5 +1,16 @@
 package server
 
+import config.InfluxdbConfiguration
+import controllers.DataController
+import controllers.services.DataService
+import data.CharRepositoryImpl
+import domain.charrepository.CharRepositoryInterface
+import domain.dtos.AcceptMeasurementsDTO
+import domain.dtos.AcceptMeasurementsListDTO
+import org.koin.core.context.startKoin
+import org.koin.core.logger.Level
+import org.koin.dsl.module
+import org.koin.java.KoinJavaComponent.inject
 import protocol.YDVP
 import protocol.YdvpHeader
 import protocol.YdvpStartingLineRequest
@@ -12,6 +23,7 @@ import java.lang.Runtime.getRuntime
 import java.net.ServerSocket
 import java.net.Socket
 import java.net.SocketException
+import kotlin.system.exitProcess
 
 class InfluxServiceClientHandler(private val clientSocket: Socket) {
     fun run() {
@@ -42,7 +54,23 @@ class InfluxServiceClientHandler(private val clientSocket: Socket) {
 }
 
 class InfluxServiceServer(socketPort: Int) {
+    init {
+        startKoin {
+            modules(module {
+                single { InfluxdbConfiguration() }
+
+                single { CharRepositoryImpl() }
+
+                single { DataService() }
+
+                single { DataController() }
+            })
+        }
+    }
+
     private val serverSocket = ServerSocket(socketPort)
+
+    private val controller by inject<DataController>(DataController::class.java)
 
     fun run() {
         getRuntime().addShutdownHook(Thread {

@@ -3,22 +3,21 @@ package controllers
 import controllers.services.DataService
 import domain.dtos.*
 import domain.response.ResponseCreator
+import org.koin.java.KoinJavaComponent.inject
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.RestController
 
 //@RequestMapping("/api/v1/data")
-@RestController
-class DataController(
-    val dataService: DataService,
-) {
+class DataController {
+    private val dataService by inject<DataService>(DataService::class.java)
+
     //    @GetMapping
-    fun getData(token: String, username: String, measurementsNames: List<String>): ResponseEntity<*> {
+    fun getData(username: String, measurementsNames: List<String>): ResponseEntity<*> {
         val outList: List<MeasurementDTO>
         try {
             outList =
                 dataService.getMeasurements(
-                    token, username,
+                    username,
                     measurementsNames
                 )
         } catch (exc: Exception) {
@@ -35,10 +34,11 @@ class DataController(
     }
 
     //    @PostMapping
-    fun addData(token: String, username: String, measurementsList: AcceptMeasurementsListDTO): ResponseEntity<*> {
+    fun addData(username: String, measurementsList: AcceptMeasurementsListDTO): ResponseEntity<*> {
         try {
-            dataService.sendMeasurements(token, username, measurementsList)
+            dataService.sendMeasurements(username, measurementsList)
         } catch (exc: Exception) {
+            println(exc.message)
             return ResponseCreator.internalServerErrorResponse(
                 "Data server is dead :(",
                 "Let's dance on its grave!"
