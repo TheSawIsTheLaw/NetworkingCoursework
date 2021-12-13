@@ -38,43 +38,43 @@ val measurementsToSend = AcceptMeasurementsListDTO(
 fun sendTest() {
     val client = InfluxServiceClient("localhost", 6666)
 
-    try {
-        client.connect()
-    } catch (exc: ConnectException) {
-        println("Server is dead")
-        return
-    }
+    client.use {
+        try {
+            client.connect()
+        } catch (exc: ConnectException) {
+            println("Server is dead")
+            return
+        }
 
-    client.sendRequestAndGetResponse(
-        YDVP(
-            YdvpStartingLineRequest("POST", "/data/TestUser", "0.1"),
-            listOf(YdvpHeader("Host", "127.0.0.1")),
-            GsonObject.gson.toJson(measurementsToSend)
+        client.sendRequestAndGetResponse(
+            YDVP(
+                YdvpStartingLineRequest("POST", "/data/TestUser", "0.1"),
+                listOf(YdvpHeader("Host", "127.0.0.1")),
+                GsonObject.gson.toJson(measurementsToSend)
+            )
         )
-    )
-
-    client.close()
+    }
 }
 
 fun getTest() {
     val client = InfluxServiceClient("localhost", 6666)
 
-    try {
-        client.connect()
-    } catch (exc: ConnectException) {
-        println("Server is dead")
-        return
-    }
+    client.use {
+        try {
+            client.connect()
+        } catch (exc: ConnectException) {
+            println("Server is dead")
+            return
+        }
 
-    client.sendRequestAndGetResponse(
-        YDVP(
-            YdvpStartingLineRequest("GET", "/data/TestUser", "0.1"),
-            listOf(YdvpHeader("Host", "127.0.0.1")),
-            GsonObject.gson.toJson(listOf("pulse", "botArterialPressure"))
+        client.sendRequestAndGetResponse(
+            YDVP(
+                YdvpStartingLineRequest("GET", "/data/TestUser", "0.1"),
+                listOf(YdvpHeader("Host", "127.0.0.1")),
+                GsonObject.gson.toJson(listOf("pulse", "botArterialPressure"))
+            )
         )
-    )
-
-    client.close()
+    }
 
 }
 
