@@ -1,59 +1,52 @@
 This is BibTeX, Version 0.99d (TeX Live 2021/Arch Linux)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: main.aux
-A level-1 auxiliary file: 00-title.aux
-A level-1 auxiliary file: 01-abstract.aux
-A level-1 auxiliary file: 02-naming.aux
 A level-1 auxiliary file: 03-intro.aux
 A level-1 auxiliary file: 10-analysis.aux
 A level-1 auxiliary file: 20-design.aux
 A level-1 auxiliary file: 30-technology.aux
-A level-1 auxiliary file: 40-research.aux
 A level-1 auxiliary file: 50-conclusion.aux
 A level-1 auxiliary file: 60-bibliography.aux
 The style file: utf8gost705u.bst
-A level-1 auxiliary file: 70-application.aux
 Database file #1: biblio.bib
-Warning--empty journal in intrusionDetection
-You've used 17 entries,
+You've used 6 entries,
             2958 wiz_defined-function locations,
-            788 strings with 9574 characters,
-and the built_in function-call counts, 5544 in all, are:
-= -- 764
-> -- 89
-< -- 18
-+ -- 35
-- -- 18
-* -- 218
-:= -- 576
-add.period$ -- 68
-call.type$ -- 17
+            704 strings with 6425 characters,
+and the built_in function-call counts, 1240 in all, are:
+= -- 158
+> -- 21
+< -- 3
++ -- 10
+- -- 4
+* -- 28
+:= -- 136
+add.period$ -- 19
+call.type$ -- 6
 change.case$ -- 0
 chr.to.int$ -- 0
-cite$ -- 18
-duplicate$ -- 278
-empty$ -- 548
-format.name$ -- 18
-if$ -- 1517
+cite$ -- 6
+duplicate$ -- 69
+empty$ -- 137
+format.name$ -- 4
+if$ -- 334
 int.to.chr$ -- 0
-int.to.str$ -- 17
+int.to.str$ -- 6
 missing$ -- 0
-newline$ -- 115
-num.names$ -- 45
-pop$ -- 140
+newline$ -- 43
+num.names$ -- 10
+pop$ -- 43
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 207
+skip$ -- 41
 stack$ -- 0
-substring$ -- 281
-swap$ -- 200
-text.length$ -- 3
+substring$ -- 14
+swap$ -- 42
+text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
-warning$ -- 1
-while$ -- 44
-width$ -- 19
-write$ -- 289
-(There was 1 warning)
+warning$ -- 0
+while$ -- 7
+width$ -- 7
+write$ -- 91
