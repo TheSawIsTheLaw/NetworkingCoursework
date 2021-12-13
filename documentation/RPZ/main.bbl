@@ -1,4 +1,4 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 \def\selectlanguageifdefined#1{
 \expandafter\ifx\csname date#1\endcsname\relax
 \else\language\csname l@#1\endcsname\fi}
@@ -49,6 +49,40 @@ The Kotlin InfluxDB 2.0 Client Github [Электронный ресурс].
 Influx Data: InfluxDB v2 API [Электронный ресурс].
 \newblock Режим доступа:
   \url{https://docs.influxdata.com/influxdb/v2.1/reference/api/} (дата
+  обращения 13.12.2021).
+
+\bibitem{clientServer}
+\selectlanguageifdefined{russian}
+Гайнанова~Р.Ш.~Широкова~О.А. Создание
+  клиент-серверных приложений~// Вестник
+  Казанского технологического
+  университета.
+\newblock 2017.
+\newblock {№}~9.
+\newblock {С.}~79--84.
+
+\bibitem{clientServerProt}
+\selectlanguageifdefined{russian}
+Учебно-методические материалы для
+  судентов кафедры АСОИУ: архитектура
+  клиент-сервер [Электронный ресурс].
+\newblock Режим доступа:
+  \url{https://www.4stud.info/networking/lecture5.html} (дата
+  обращения 13.12.2021).
+
+\bibitem{http}
+\selectlanguageifdefined{russian}
+Бондаренко~Т.В.~Федотов~Е.А.~Бондаренко~А.В.
+  Разработка http сервера~// ИВД.
+\newblock 2018.
+\newblock Т.~49, {№}~2.
+
+\bibitem{http11}
+\selectlanguageifdefined{russian}
+Официальная документация HTTP/1.1
+  [Электронный ресурс].
+\newblock Режим доступа:
+  \url{https://datatracker.ietf.org/doc/html/rfc2616} (дата
   обращения 13.12.2021).
 
 \end{thebibliography}
