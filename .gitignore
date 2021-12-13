@@ -25,3 +25,6 @@ hs_err_pid*
 src/build/*
 src/.gradle/*
 src/.idea/*
+
+*.aux
+*.out

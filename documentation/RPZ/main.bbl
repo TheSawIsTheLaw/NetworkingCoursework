@@ -1,0 +1,155 @@
+\begin{thebibliography}{10}
+\def\selectlanguageifdefined#1{
+\expandafter\ifx\csname date#1\endcsname\relax
+\else\language\csname l@#1\endcsname\fi}
+\ifx\undefined\url\def\url#1{{\small #1}}\else\fi
+\ifx\undefined\BibUrl\def\BibUrl#1{\url{#1}}\else\fi
+\ifx\undefined\BibAnnote\long\def\BibAnnote#1{(#1)}\else\fi
+\ifx\undefined\BibEmph\def\BibEmph#1{\emph{#1}}\else\fi
+
+\bibitem{fatigueAsSymptom}
+\selectlanguageifdefined{russian}
+Т.В.~Байдина~Т.И.~Колесова~Б.В.~Малинина.
+  Усталость как симптом неврологических
+  заболеваний~// Пермский медицинский
+  журнал.
+\newblock 2021.
+\newblock Т.~38, {№}~2.
+\newblock {С.}~37--44.
+
+\bibitem{syndromOfChrono}
+\selectlanguageifdefined{russian}
+Н.В.~Пизова~А.В.~Пизов. Когнитивные
+  нарушения и синдром хронической
+  усталости~// Нервные болезни.
+\newblock 2021.
+\newblock {№}~3.
+\newblock {С.}~10--16.
+
+\bibitem{fatigueChronoInvestigation}
+\selectlanguageifdefined{russian}
+Committee on the Diagnostic Criteria for Myalgic Encephalomyelitis/Chronic
+  Fatigue Syndrome; Board on the Health of Select Populations; Institute of
+  Medicine~// The National Academies Collection: Reports funded by National
+  Institutes of Health.
+\newblock 2015.
+
+\bibitem{neuroPhysicalMechasmsOfStress}
+\selectlanguageifdefined{russian}
+Долбышев~А.В. Нейрофизиологические
+  механизмы стресса~// StudNet.
+\newblock 2020.
+\newblock {№}~7.
+\newblock {С.}~163--167.
+
+\bibitem{stressAndPatology}
+\selectlanguageifdefined{russian}
+Г.В.~Порядина. Стресс и патология: учеб.
+  пособие.
+\newblock М.: РГМУ, 2009.
+\newblock {с.}~23.
+
+\bibitem{professionalStress}
+\selectlanguageifdefined{russian}
+Деева~О.С. Причины профессионального
+  стресса и методы его профилактики~//
+  Ученые записки Тамбовского отделения
+  РоСМУ.
+\newblock 2019.
+\newblock Т.~38, {№}~14.
+\newblock {С.}~140--146.
+
+\bibitem{rosstatInvestigation}
+\selectlanguageifdefined{russian}
+Информационное общество в Российской
+  Федерации, 2020. Статистический сборник
+  [Электронный ресурс].
+\newblock Режим доступа:
+  \url{https://rosstat.gov.ru/storage/mediabank/lqv3T0Rk/info-ob2020.pdf}
+  (дата обращения 08.12.2021).
+\newblock 2020.
+
+\bibitem{encDic}
+\selectlanguageifdefined{russian}
+А.М.~Прохоров. Большой Российский
+  энциклопедический словарь.
+\newblock Большая рос. энциклопедия, 1998.
+\newblock {с.}~1450.
+
+\bibitem{recognitionOfPsycho}
+\selectlanguageifdefined{russian}
+В.И.~Васильев~А.Е.~Сулавко~Р.В.~Борисов.
+  Распознавание психофизиологических
+  состояний пользователей на основе
+  скрытого мониторинга действий в
+  компьютерных системах~// ИСКУССТВЕННЫЙ
+  ИНТЕЛЛЕКТ И ПРИНЯТИЕ РЕШЕНИЙ.
+\newblock 2017.
+\newblock {С.}~21--37.
+
+\bibitem{keystroke}
+\selectlanguageifdefined{russian}
+Е. В.~Шкляр~Е. Г.~Воробьев~М. Ф.~Савельев.
+  Распознавание клавиатурного почерка в
+  браузере~// Известия СПбГЭТУ «ЛЭТИ».
+\newblock 2019.
+\newblock {С.}~58--63.
+
+\bibitem{intrusionDetection}
+\selectlanguageifdefined{english}
+Axelsson~S. The Base-Rate Fallacy and its Implications for the Difficulty of
+  Intrusion Detection.
+\newblock 1999.  12.
+\newblock P.~1--10.
+
+\bibitem{fitts}
+\selectlanguageifdefined{russian}
+Раскин~Д. Интерфейс: новые направления в
+  проектировании компьютерных систем.
+\newblock Символ-плюс, 2010.
+\newblock {с.}~272.
+
+\bibitem{mouseMethod}
+\selectlanguageifdefined{russian}
+Р.В.~Борисов~Д.Н.~Зверев~А.Е.~Сулавко. Оценка
+  идентификационных возможностей
+  особенностей работы пользователя с
+  компьютерной мышью~// Вестник СибАДИ.
+\newblock 2015.
+\newblock {С.}~106--113.
+
+\bibitem{videoMethod}
+\selectlanguageifdefined{russian}
+И.Б.~Лашков~А.М.~Кашевник. Определение
+  опасных состояний водителя на основе
+  мобильных видеоизмерений его лицевых
+  характеристик~// ИНФОРМАЦИОННЫЕ
+  ТЕХНОЛОГИИ И ВЫЧИСЛИТЕЛЬНЫЕ СИСТЕМЫ.
+\newblock 2019.
+\newblock {С.}~84--96.
+
+\bibitem{medObozr}
+\selectlanguageifdefined{russian}
+М.А.~Лебедев~С.Ю.~Палатов~Г.В.~Ковров.
+  Усталость и ее проявления~// Медицинское
+  обозрение.
+\newblock 2014.
+\newblock {С.}~282--288.
+
+\bibitem{voiceMethod}
+\selectlanguageifdefined{russian}
+В.В.~Киселев. Автоматическое определение
+  эмоций по речи~// Технологии и практика
+  обучения.
+\newblock 2012.
+\newblock {С.}~85--89.
+
+\bibitem{whyMicrophoneIsShit}
+\selectlanguageifdefined{russian}
+Voice Stress Analysis: A New Framework for Voice and Effort in Human
+  Performance~/ Martine~Van~Puyvelde, Xavier~Neyt, Francis~McGlone
+  {[и~др.]}~// Frontiers in Psychology.
+\newblock 2018.
+\newblock Т.~9, {№}~14.
+
+\end{thebibliography}
