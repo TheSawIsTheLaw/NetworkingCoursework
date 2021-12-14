@@ -1,6 +1,5 @@
 package server
 
-import com.google.gson.reflect.TypeToken
 import config.InfluxdbConfiguration
 import controllers.DataController
 import controllers.services.DataService

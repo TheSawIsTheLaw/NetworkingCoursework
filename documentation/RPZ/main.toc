@@ -10,7 +10,7 @@
 \contentsline {section}{\numberline {2}Конструкторский раздел}{8}{section.2}%
 \contentsline {subsection}{\numberline {2.1}Диаграмма вариантов использования}{8}{subsection.2.1}%
 \contentsline {subsection}{\numberline {2.2}Диаграмма классов}{8}{subsection.2.2}%
-\contentsline {subsection}{\numberline {2.3}Блок-схема работы сервера}{8}{subsection.2.3}%
-\contentsline {section}{\numberline {3}Технологический раздел}{9}{section.3}%
-\contentsline {section}{ЗАКЛЮЧЕНИЕ}{10}{section.3}%
-\contentsline {section}{СПИСОК ИСПОЛЬЗОВАННЫХ ИСТОЧНИКОВ}{11}{section.3}%
+\contentsline {subsection}{\numberline {2.3}Блок-схема работы сервера}{13}{subsection.2.3}%
+\contentsline {section}{\numberline {3}Технологический раздел}{14}{section.3}%
+\contentsline {section}{ЗАКЛЮЧЕНИЕ}{15}{section.3}%
+\contentsline {section}{СПИСОК ИСПОЛЬЗОВАННЫХ ИСТОЧНИКОВ}{16}{section.3}%
