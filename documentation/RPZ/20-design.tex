@@ -2,40 +2,6 @@
 
 \subsection{Диаграмма вариантов использования}
 
-\subsection{Диаграмма классов}
-На рисунках \ref{fig:dataLayer} -- \ref{fig:serverAndProtocol} предоставлены диаграммы классов компонентов приложения.
-
-\begin{figure}[H]
-\begin{center}
-\includegraphics[width=\textwidth]{img/dataLayerDiagram.png}
-\captionsetup{justification=centering}
-	\caption{Диаграмма классов слоя доступа к данным приложения. }
-	\label{fig:dataLayer}
-\end{center}
-\end{figure}
-
-\begin{figure}[hbtp]
-	\centering
-	\includegraphics[width=\textwidth]{img/domainLayerDiagram.png}
-	\caption{Диаграмма классов бизнес-логики приложения. }
-	\label{fig:domainLayer}
-\end{figure}
-
-\begin{figure}[hbtp]
-	\centering
-	\includegraphics[width=\textwidth]{img/dataAndControllerLinkageDiagram.png}
-	\caption{Диаграмма классов, показывающая связь контроллера и слоя доступа к данным. }
-	\label{fig:dataAndController}
-\end{figure}
-
-\begin{figure}[hbtp]
-	\centering
-	\includegraphics[width=\textwidth]{img/serverDiagram.png}
-	\caption{Диаграмма классов серверной части приложения. }
-	\label{fig:serverAndProtocol}
-\end{figure}
-\pagebreak
-
 \subsection{Блок-схема работы сервера}
 На рисунке \ref{fig:serverScheme} предоставлена блок-схема начала работы сервера и алгоритма обработки запросов пользователей.
 
@@ -45,6 +11,18 @@
 	\caption{Блок-схема работы сервера приложения. }
 	\label{fig:serverScheme}
 \end{figure}
-\pagebreak
+
+\subsection{Описание YDVP-протокола}
+На основе существующего стандарта HTTP в данном подразделе описывается структура реализуемого YDVP-протокола.
+
+YDVP-запрос включает в себя три компонента:
+\begin{itemize}[leftmargin=1.6\parindent]
+\item стартовую строку (определяющей тип сообщения);
+\item заголовки (характеризующих тело сообщения, параметры передачи и т.д.);
+\item тело (данные сообщения).
+\end{itemize}
+
+И так далее по списку, грубо говоря, только копируем...
+Обязательно говорим о том, что в нашем протоколе потребуется только поддержка GET и POST методов, а также пара слов о том, что текущая версия 0.1
 
 \pagebreak
