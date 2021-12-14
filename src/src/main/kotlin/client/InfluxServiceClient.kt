@@ -37,14 +37,6 @@ class InfluxServiceClient(private val ip: String, private val port: Int): Closea
         return YdvpParser().parseResponse(response)
     }
 
-    fun sendGreetingMessageAndGetResponse(): String? {
-        output?.println("Hello message from socket")
-        val response = input?.readLine()
-        println("Got in sendGreet: $response")
-
-        return response
-    }
-
     override fun close() {
         output?.close()
         input?.close()

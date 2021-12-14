@@ -70,6 +70,21 @@ Influx Data: InfluxDB v2 API [Электронный ресурс].
   \url{https://www.4stud.info/networking/lecture5.html} (дата
   обращения 13.12.2021).
 
+\bibitem{mvcInfo}
+\selectlanguageifdefined{russian}
+Обобщенный Model-View-Controller (Сергей Рогачёв)
+  [Электронный ресурс].
+\newblock Режим доступа:
+  \url{http://rsdn.org/article/patterns/generic-mvc.xml} (дата
+  обращения 14.12.2021).
+
+\bibitem{mvcHabr}
+\selectlanguageifdefined{russian}
+Паттерны для новичков: MVC vs MVP vs MVVM
+  [Электронный ресурс].
+\newblock Режим доступа: \url{https://habr.com/ru/post/215605/}
+  (дата обращения 14.12.2021).
+
 \bibitem{http}
 \selectlanguageifdefined{russian}
 Бондаренко~Т.В.~Федотов~Е.А.~Бондаренко~А.В.
@@ -84,5 +99,12 @@ Influx Data: InfluxDB v2 API [Электронный ресурс].
 \newblock Режим доступа:
   \url{https://datatracker.ietf.org/doc/html/rfc2616} (дата
   обращения 13.12.2021).
+
+\bibitem{Kotlin}
+\selectlanguageifdefined{russian}
+Kotlin language specification [Электронный ресурс].
+\newblock Режим доступа:
+  \url{https://kotlinlang.org/spec/introduction.html} (дата
+  обращения 09.10.2020).
 
 \end{thebibliography}
