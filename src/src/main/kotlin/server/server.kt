@@ -54,6 +54,13 @@ class InfluxServiceClientHandler(private val clientSocket: Socket) {
         )
     }
 
+    private val methodNotAllowed by lazy {
+        YDVP(
+            YdvpStartingLineResponse(ydvpVersion, "405", "METHOD NOT ALLOWED"),
+            listOf(defaultHeader)
+        )
+    }
+
     private val notFoundResponse by lazy {
         YDVP(
             YdvpStartingLineResponse(ydvpVersion, "404", "NOT FOUND"),
@@ -119,7 +126,7 @@ class InfluxServiceClientHandler(private val clientSocket: Socket) {
             when (method) {
                 "GET" -> controllerGetMethod(uri, body)
                 "POST" -> controllerPostMethod(uri, body)
-                else -> badRequestResponse
+                else -> methodNotAllowed
             }
         } catch (exc: NullPointerException) {
             badRequestResponse
