@@ -28,3 +28,6 @@ src/.idea/*
 
 *.aux
 *.out
+*.bbl
+*.blg
+*.toc
