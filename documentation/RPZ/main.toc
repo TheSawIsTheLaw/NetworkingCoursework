@@ -1,7 +1,7 @@
 \babel@toc {russian}{}
 \contentsline {section}{Введение}{3}{Doc-Start}%
 \contentsline {section}{\numberline {1}Аналитический раздел}{4}{section.1}%
-\contentsline {subsection}{\numberline {1.1}Формализация задачи}{4}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.1}Формализация цели}{4}{subsection.1.1}%
 \contentsline {subsection}{\numberline {1.2}Существующие решения}{4}{subsection.1.2}%
 \contentsline {subsubsection}{\numberline {1.2.1}The Kotlin InfluxDB 2.0 Client}{4}{subsubsection.1.2.1}%
 \contentsline {subsubsection}{\numberline {1.2.2}InfluxDB v2 API}{5}{subsubsection.1.2.2}%
