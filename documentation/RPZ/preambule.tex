@@ -97,9 +97,52 @@
 \hypersetup{citecolor=black}
 
 \usepackage{listings}
+\lstdefinelanguage{Kotlin}{
+  comment=[l]{//},
+  commentstyle={\color{gray}\ttfamily},
+  emph={delegate, filter, first, firstOrNull, forEach, lazy, map, mapNotNull, println, return@},
+  emphstyle={\color{OrangeRed}},
+  identifierstyle=\color{black},
+  keywords={abstract, actual, as, as?, break, by, class, companion, continue, data, do, dynamic, else, enum, expect, false, final, for, fun, get, if, import, in, interface, internal, is, null, object, override, package, private, public, return, set, super, suspend, this, throw, true, try, typealias, val, var, vararg, when, where, while},
+  keywordstyle={\color{blue}\bfseries},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]",
+  morestring=[s]{"""*}{*"""},
+  ndkeywords={@Deprecated, @JvmField, @JvmName, @JvmOverloads, @JvmStatic, @JvmSynthetic, Array, Byte, Double, Float, Int, Integer, Iterable, Long, Runnable, Short, String},
+  ndkeywordstyle={\color{orange}\bfseries},
+  sensitive=true,
+  stringstyle={\color{green}\ttfamily},
+}
+
+% Для листинга кода:
 \lstset{
 	basicstyle=\footnotesize\ttfamily,
-	language=[Sharp]C, % Или другой ваш язык -- см. документацию пакета
+	language=Kotlin, % Или другой ваш язык -- см. документацию пакета
+	commentstyle=\color{comment},
+	numbers=left,
+	numberstyle=\tiny\color{plain},
+	numbersep=5pt,
+	tabsize=4,
+	extendedchars=\true,
+	breaklines=true,
+	breakatwhitespace=false,
+	keywordstyle=\color{blue},
+	frame=b,
+	stringstyle=\ttfamily\color{string}\ttfamily,
+	showspaces=false,
+	showtabs=false,
+	xleftmargin=17pt,
+	framexleftmargin=17pt,
+	framexrightmargin=5pt,
+	framexbottommargin=4pt,
+	showstringspaces=false,
+	inputencoding=utf8x,
+	keepspaces=true
+}
+
+
+\lstset{
+	language=Kotlin,
 	commentstyle=\color{comment},
 	numbers=left,
 	numberstyle=\tiny\color{plain},

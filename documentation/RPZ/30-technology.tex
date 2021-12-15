@@ -68,11 +68,122 @@
 	\label{fig:serverAndProtocol}
 \end{figure}
 
+\subsection{Особенности реализации}
+В листинге \ref{code:InfluxServiceServer} предоставлено описание класса сервера приложения.
+
+Данный класс включает в себя инициализацию классов для инъекции зависимостей в модули, используемые сервисами и контроллерами, а также передачу приходящих клиентов обработчику -- классу InfluxServiceClientHandler в отдельном потоке, таким образом достигается возможность одновременной обработки запросов от нескольких клиентов.
+
+\begin{code}
+	\captionof{listing}{Реализация класса InfluxServiceServer}
+	\label{code:InfluxServiceServer}
+	\inputminted
+	[
+	frame=single,
+	framerule=0.5pt,
+	framesep=20pt,
+	fontsize=\small,
+	tabsize=4,
+	linenos,
+	numbersep=5pt,
+	xleftmargin=10pt,
+	firstline=185,
+	lastline=221,
+	breaklines=true
+	]
+	{text}
+	{code/server.kt}
+\end{code}
+
+В листинге \ref{code:InfluxServiceClientHandler} предоставлено описание класса обработчика заявок клиента.
+
+Данный класс включает в себя необходимый для навигации по ресурсам контроллер, а также типовые объекты YDVP-ответов и методы обработки запроса клиента.
+
+\begin{code}
+	\captionof{listing}{Реализация класса InfluxServiceClientHadler}
+	\label{code:InfluxServiceClientHandler}
+	\inputminted
+	[
+	frame=single,
+	framerule=0.5pt,
+	framesep=20pt,
+	fontsize=\small,
+	tabsize=4,
+	linenos,
+	numbersep=5pt,
+	xleftmargin=10pt,
+	firstline=26,
+	lastline=183,
+	breaklines=true
+	]
+	{text}
+	{code/server.kt}
+\end{code}
+
 \subsection{Пример использования приложения}
+В листингах \ref{code:server}--\ref{code:client} предоставлены пример реализации взаимодействия пользователя с сервером.
+\begin{code}
+	\captionof{listing}{Пример организации серверной части.}
+	\label{code:server}
+	\inputminted
+	[
+	frame=single,
+	framerule=0.5pt,
+	framesep=20pt,
+	fontsize=\small,
+	tabsize=4,
+	linenos,
+	numbersep=5pt,
+	xleftmargin=10pt,
+	breaklines=true
+	]
+	{text}
+	{code/helloServer.kt}
+\end{code}
+
+\begin{code}
+	\captionof{listing}{Пример вызовов со стороны клиента.}
+	\label{code:client}
+	\inputminted
+	[
+	frame=single,
+	framerule=0.5pt,
+	framesep=20pt,
+	fontsize=\small,
+	tabsize=4,
+	linenos,
+	numbersep=5pt,
+	xleftmargin=10pt,
+	breaklines=true
+	]
+	{text}
+	{code/helloClient.kt}
+\end{code}
+
+На рисунках \ref{fig:serverOutput}--\ref{fig:clientOutput} предоставлен результат выполнения клиентской и серверной частей предоставленного примера.
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=\textwidth]{img/serverOutput.png}
+\captionsetup{justification=centering}
+	\caption{Результат выполнения запроса на стороне сервера. }
+	\label{fig:serverOutput}
+\end{center}
+\end{figure}
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=\textwidth]{img/clientOutput.png}
+\captionsetup{justification=centering}
+	\caption{Результат выполнения запроса на клиентской стороне. }
+	\label{fig:clientOutput}
+\end{center}
+\end{figure}
 
 \subsection*{Вывод}
 В качестве средств реализации были выбраны язык программирования Kotlin и среда разработки Intellij IDEA.
 
 В разделе были предоставлены краткие сведения о модулях программы, в которых была предоставлена информация об используемых паттернах проектирования, а также системе взаимодействии классов в приложении.
 
-Также были рассмотрены структура и состав классов, представленных в форме UML-диаграмм.
+Также были рассмотрены структура и состав классов, представленных в форме UML-диаграмм, и приведены особенности реализации, указывающие на возможность одновременной работы реализованного сервера с несколькими клиентами.
+
+Пример, предоставленный в разделе, показал возможные пути использования реализованных компонентов.

@@ -6,8 +6,6 @@ import controllers.services.DataService
 import data.CharRepositoryImpl
 import domain.dtos.AcceptMeasurementsListDTO
 import gson.GsonObject
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import org.koin.core.context.startKoin
 import org.koin.dsl.module
 import org.koin.java.KoinJavaComponent.inject
@@ -24,7 +22,6 @@ import java.lang.Runtime.getRuntime
 import java.net.ServerSocket
 import java.net.Socket
 import java.net.SocketException
-import kotlin.concurrent.thread
 
 class InfluxServiceClientHandler(private val clientSocket: Socket) {
     private val ydvpVersion = "0.1"
@@ -84,16 +81,26 @@ class InfluxServiceClientHandler(private val clientSocket: Socket) {
     private fun controllerPostMethod(uri: String, body: String): YDVP {
         val parsedUri = prepareUri(uri)
 
+        println("Body in controller:")
+        println(body)
+
         return when (parsedUri.first()) {
             "data" -> {
                 if (parsedUri.size < 2)
                     throw UnsupportedUriException("Not enough inline arguments")
                 val response = controller.addData(
                     parsedUri[1],
-                    GsonObject.gson.fromJson(body, AcceptMeasurementsListDTO::class.java)
+                    GsonObject.gson.fromJson(
+                        body,
+                        AcceptMeasurementsListDTO::class
+                            .java
+                    )
                 )
 
-                anyResponse(response.statusCodeValue.toString(), response.statusCode.name, response.body)
+                anyResponse(response.statusCodeValue
+                                    .toString(),
+                            response.statusCode.name,
+                            response.body)
             }
             else -> throw UnsupportedUriException("Unsupported URI")
         }
@@ -109,7 +116,10 @@ class InfluxServiceClientHandler(private val clientSocket: Socket) {
                 val response =
                     controller.getData(parsedUri[1], GsonObject.gson.fromJson(body, Array<String>::class.java).toList())
 
-                anyResponse(response.statusCodeValue.toString(), response.statusCode.name, response.body)
+                anyResponse(response.statusCodeValue
+                                    .toString(),
+                            response.statusCode.name,
+                            response.body)
             }
             else -> throw UnsupportedUriException("Way not found")
         }
@@ -143,12 +153,18 @@ class InfluxServiceClientHandler(private val clientSocket: Socket) {
     fun run() {
         println("Accepted client on ${clientSocket.localSocketAddress} from ${clientSocket.remoteSocketAddress}")
 
-        val bufferedReader = BufferedReader(InputStreamReader(clientSocket.getInputStream()))
+        val bufferedReader = BufferedReader(
+                                InputStreamReader(
+                                    clientSocket
+                                        .getInputStream()
+                                )
+                            )
 
         var gotRequest = bufferedReader.readLine() + "\n"
         while (bufferedReader.ready())
             gotRequest += bufferedReader.readLine() + "\n"
 
+        println("Got lines are: \n$gotRequest")
         val clientOut = PrintWriter(clientSocket.getOutputStream(), true)
 
         val ydvpRequest = try {
@@ -159,9 +175,8 @@ class InfluxServiceClientHandler(private val clientSocket: Socket) {
             return
         }
 
-        /* And here comes protocol */
-        /* FUS ROH DAH */
-        val response = controllerWayByMethod(ydvpRequest).createStringResponse()
+        val response = controllerWayByMethod(ydvpRequest)
+                            .createStringResponse()
         println("Returned to client:\n$response")
         clientOut.println(response)
     }
@@ -186,10 +201,6 @@ class InfluxServiceServer(socketPort: Int) {
 
     fun run() {
         getRuntime().addShutdownHook(Thread {
-//            Ok, so... JVM just closes it all for me. And I cannot even reach it. Nice.
-//            if (serverSocket.isClosed)
-//                serverSocket.close()
-
             println("Server on port ${serverSocket.localPort} stopped")
         })
 
@@ -202,7 +213,8 @@ class InfluxServiceServer(socketPort: Int) {
         while (true) {
             val clientSocket = serverSocket.accept()
             thread {
-                InfluxServiceClientHandler(clientSocket).run()
+                InfluxServiceClientHandler(clientSocket)
+                    .run()
             }
         }
     }
