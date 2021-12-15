@@ -19,4 +19,4 @@
 \contentsline {subsection}{\numberline {3.4}Особенности реализации}{17}{subsection.3.4}%
 \contentsline {subsection}{\numberline {3.5}Пример использования приложения}{23}{subsection.3.5}%
 \contentsline {section}{ЗАКЛЮЧЕНИЕ}{28}{figure.caption.13}%
-\contentsline {section}{СПИСОК ИСПОЛЬЗОВАННЫХ ИСТОЧНИКОВ}{29}{figure.caption.13}%
+\contentsline {section}{СПИСОК ИСПОЛЬЗОВАННЫХ ИСТОЧНИКОВ}{30}{figure.caption.13}%
